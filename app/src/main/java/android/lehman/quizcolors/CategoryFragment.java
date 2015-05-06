@@ -1,6 +1,7 @@
 package android.lehman.quizcolors;
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,8 @@ import android.view.ViewGroup.LayoutParams;
  */
 public class CategoryFragment extends Fragment {
 
+    private final String PARAM_QUESTIONFRAGMENT = "category";
+
     public CategoryFragment () {
 
     }
@@ -24,13 +27,28 @@ public class CategoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_category, container, false);
 
-        for (Category category : Category.values()) {
-            Button myButton = new Button(getActivity().getApplicationContext());
-            myButton.setText(category.name());
+        for (final Category category : Category.values()) {
+            Button categoryStart = new Button(getActivity().getApplicationContext());
+            categoryStart.setText(category.name());
 
             LinearLayout linearLayout = (LinearLayout)rootView.findViewById(R.id.categoryLinearLayout);
             LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-            linearLayout.addView(myButton, layoutParams);
+            linearLayout.addView(categoryStart, layoutParams);
+
+            categoryStart.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString(PARAM_QUESTIONFRAGMENT, category.name());
+
+                    QuestionFragment questionFragment = new QuestionFragment();
+                    questionFragment.setArguments(bundle);
+
+                    final FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.replace(R.id.container, questionFragment).commit();
+                }
+            });
         }
 
         return rootView;

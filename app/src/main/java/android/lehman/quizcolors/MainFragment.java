@@ -23,8 +23,8 @@ public class MainFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 final FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.container, new CategoryFragment()).commit();
                 fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.replace(R.id.container, new CategoryFragment()).commit();
             }
         });
 

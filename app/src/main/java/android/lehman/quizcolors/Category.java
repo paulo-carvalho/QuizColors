@@ -5,5 +5,5 @@ package android.lehman.quizcolors;
  * Created by Paulo-Lehman on 5/6/2015.
  */
 public enum Category {
-    COLORS
+    Colors
 }

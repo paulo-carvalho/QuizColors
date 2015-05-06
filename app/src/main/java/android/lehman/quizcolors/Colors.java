@@ -4,7 +4,7 @@ package android.lehman.quizcolors;
  * Class from QuizColors at android.lehman.quizcolors
  * Created by Paulo-Lehman on 5/6/2015.
  */
-public enum Color {
+public enum Colors {
     ACID_GREEN          ("Acid Green",          "#B0BF1A"),
     AERO                ("Aero",                "#7CB9E8"),
     AERO_BLUE           ("Aero Blue",           "#C9FFE5"),
@@ -30,7 +30,7 @@ public enum Color {
     private final String nameColor;
     private final String hexColor;
 
-    Color(String nameColor, String hexColor) {
+    Colors(String nameColor, String hexColor) {
         this.nameColor = nameColor;
         this.hexColor = hexColor;
     }
