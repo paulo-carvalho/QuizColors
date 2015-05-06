@@ -14,7 +14,6 @@ import android.view.ViewGroup.LayoutParams;
  * Created by Paulo-Lehman on 5/6/2015.
  */
 public class CategoryFragment extends Fragment {
-    Category categories;
 
     public CategoryFragment () {
 
@@ -27,7 +26,7 @@ public class CategoryFragment extends Fragment {
 
         for (Category category : Category.values()) {
             Button myButton = new Button(getActivity().getApplicationContext());
-            myButton.setText(category.toString());
+            myButton.setText(category.name());
 
             LinearLayout linearLayout = (LinearLayout)rootView.findViewById(R.id.categoryLinearLayout);
             LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);

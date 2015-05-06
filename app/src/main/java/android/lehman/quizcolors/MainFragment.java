@@ -1,5 +1,6 @@
 package android.lehman.quizcolors;
 
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -21,9 +22,9 @@ public class MainFragment extends Fragment {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getFragmentManager().beginTransaction()
-                        .add(R.id.container, new CategoryFragment())
-                        .commit();
+                final FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.container, new CategoryFragment()).commit();
+                fragmentTransaction.addToBackStack(null);
             }
         });
 
