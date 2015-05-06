@@ -4,7 +4,7 @@ package android.lehman.quizcolors;
  * Class from QuizColors at android.lehman.quizcolors
  * Created by Paulo-Lehman on 5/6/2015.
  */
-public enum Colors {
+public enum Colors implements CategoryStrategy {
     ACID_GREEN          ("Acid Green",          "#B0BF1A"),
     AERO                ("Aero",                "#7CB9E8"),
     AERO_BLUE           ("Aero Blue",           "#C9FFE5"),
@@ -41,5 +41,14 @@ public enum Colors {
 
     public String hexColor() {
         return hexColor;
+    }
+
+    /* Implementing Strategy Interface */
+    public String getStrategy() {
+        return Category.Colors.name();
+    }
+
+    public void setStrategy(String strategy) {
+
     }
 }
