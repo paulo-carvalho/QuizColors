@@ -45,6 +45,7 @@ public class CategoryFragment extends Fragment {
                     questionFragment.setArguments(bundle);
 
                     final FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                    //TODO: not working, back button closes app
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.replace(R.id.container, questionFragment).commit();
                 }

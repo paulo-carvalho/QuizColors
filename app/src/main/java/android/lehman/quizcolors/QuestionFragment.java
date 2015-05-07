@@ -66,6 +66,7 @@ public class QuestionFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 final FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                //TODO: not working, back button closes app
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.replace(R.id.container, new ResultFragment()).commit();
             }
