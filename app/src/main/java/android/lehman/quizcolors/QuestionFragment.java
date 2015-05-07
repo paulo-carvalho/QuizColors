@@ -19,7 +19,10 @@ import java.util.Random;
 public class QuestionFragment extends Fragment {
     private final int COUNT_ALTERNATIVES = 4;
     protected static final int COUNT_QUESTIONS = 20;
+
+    //parameter key to store/load score (0~20)
     protected static final String PARAM_SCORE = "score";
+
     //parameter key to send index(1~20) to QuestionFragment itself
     protected final String PARAM_INDEXQUESTIONS = "index";
 
