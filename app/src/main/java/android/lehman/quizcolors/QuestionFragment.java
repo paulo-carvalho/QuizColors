@@ -2,7 +2,9 @@ package android.lehman.quizcolors;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +28,9 @@ public class QuestionFragment extends Fragment {
     //parameter key to send index(1~20) to QuestionFragment itself
     protected final String PARAM_INDEXQUESTIONS = "index";
 
+    //time to switch questions
+    protected final int TIME_DELAYFRAGMENT = 1500;
+
     protected int score = 0;
     protected int indexQuestions = 0;
 
@@ -38,7 +43,7 @@ public class QuestionFragment extends Fragment {
                              Bundle savedInstanceState) {
         CategoryStrategy categoryStrategy;
         categoryStrategy = new CategoryColors();
-        Button answers[];
+        final Button answers[];
         Random random = new Random(new Date().getTime());
         int index = 0,
             correctAnswer = 0;
@@ -79,27 +84,37 @@ public class QuestionFragment extends Fragment {
             answers[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Bundle bundle = new Bundle();
-                    bundle.putInt(PARAM_SCORE, score);
-                    bundle.putInt(PARAM_INDEXQUESTIONS, ++indexQuestions);
+                    final View VIEW = v;
+                    new CountDownTimer(TIME_DELAYFRAGMENT, TIME_DELAYFRAGMENT-1000) {
 
-                    if(indexQuestions < COUNT_QUESTIONS) {
-                        QuestionFragment questionFragment = new QuestionFragment();
-                        questionFragment.setArguments(bundle);
+                        public void onTick(long millisUntilFinished) {
+                            VIEW.setBackgroundColor(Color.parseColor("#FF0000"));
+                        }
 
-                        final FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                        //TODO: not working, back button closes app
-                        fragmentTransaction.addToBackStack(null);
-                        fragmentTransaction.replace(R.id.container, questionFragment).commit();
-                    } else {
-                        ResultFragment resultFragment = new ResultFragment();
-                        resultFragment.setArguments(bundle);
+                        public void onFinish() {
+                            Bundle bundle = new Bundle();
+                            bundle.putInt(PARAM_SCORE, score);
+                            bundle.putInt(PARAM_INDEXQUESTIONS, ++indexQuestions);
 
-                        final FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                        //TODO: not working, back button closes app
-                        fragmentTransaction.addToBackStack(null);
-                        fragmentTransaction.replace(R.id.container, resultFragment).commit();
-                    }
+                            if(indexQuestions < COUNT_QUESTIONS) {
+                                QuestionFragment questionFragment = new QuestionFragment();
+                                questionFragment.setArguments(bundle);
+
+                                final FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                                //TODO: not working, back button closes app
+                                fragmentTransaction.addToBackStack(null);
+                                fragmentTransaction.replace(R.id.container, questionFragment).commit();
+                            } else {
+                                ResultFragment resultFragment = new ResultFragment();
+                                resultFragment.setArguments(bundle);
+
+                                final FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                                //TODO: not working, back button closes app
+                                fragmentTransaction.addToBackStack(null);
+                                fragmentTransaction.replace(R.id.container, resultFragment).commit();
+                            }
+                        }
+                    }.start();
                 }
             });
         }
@@ -109,27 +124,37 @@ public class QuestionFragment extends Fragment {
         answers[correctAnswer].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putInt(PARAM_SCORE, ++score);
-                bundle.putInt(PARAM_INDEXQUESTIONS, ++indexQuestions);
+                final View VIEW = v;
+                new CountDownTimer(TIME_DELAYFRAGMENT, TIME_DELAYFRAGMENT-1000) {
 
-                if(indexQuestions < COUNT_QUESTIONS) {
-                    QuestionFragment questionFragment = new QuestionFragment();
-                    questionFragment.setArguments(bundle);
+                    public void onTick(long millisUntilFinished) {
+                        VIEW.setBackgroundColor(Color.parseColor("#00FF00"));
+                    }
 
-                    final FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                    //TODO: not working, back button closes app
-                    fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.replace(R.id.container, questionFragment).commit();
-                } else {
-                    ResultFragment resultFragment = new ResultFragment();
-                    resultFragment.setArguments(bundle);
+                    public void onFinish() {
+                        Bundle bundle = new Bundle();
+                        bundle.putInt(PARAM_SCORE, ++score);
+                        bundle.putInt(PARAM_INDEXQUESTIONS, ++indexQuestions);
 
-                    final FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                    //TODO: not working, back button closes app
-                    fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.replace(R.id.container, resultFragment).commit();
-                }
+                        if (indexQuestions < COUNT_QUESTIONS) {
+                            QuestionFragment questionFragment = new QuestionFragment();
+                            questionFragment.setArguments(bundle);
+
+                            final FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                            //TODO: not working, back button closes app
+                            fragmentTransaction.addToBackStack(null);
+                            fragmentTransaction.replace(R.id.container, questionFragment).commit();
+                        } else {
+                            ResultFragment resultFragment = new ResultFragment();
+                            resultFragment.setArguments(bundle);
+
+                            final FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                            //TODO: not working, back button closes app
+                            fragmentTransaction.addToBackStack(null);
+                            fragmentTransaction.replace(R.id.container, resultFragment).commit();
+                        }
+                    }
+                }.start();
             }
         });
 

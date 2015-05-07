@@ -26,7 +26,7 @@ public enum Colors {
     AMAZON("Amazon", "#3B7A57"),
     AMBER("Amber", "#FFBF00"),
     AMBER_SAE_ECE("Amber (SAE/ECE)", "#FF7E00"),
-    AMERICAN_ROSE("Acid Green", "#FF033E"),
+    AMERICAN_ROSE("American Rose", "#FF033E"),
     AMETHYST("Amethyst", "#9966CC"),
     ANDROID_GREEN("Android Green", "#A4C639");
 
