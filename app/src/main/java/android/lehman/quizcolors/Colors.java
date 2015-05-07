@@ -32,6 +32,7 @@ public enum Colors {
 
     private final String nameColor;
     private final String hexColor;
+    public static final int COUNT_COLORS = 20;
 
     Colors(String nameColor, String hexColor) {
         this.nameColor = nameColor;
