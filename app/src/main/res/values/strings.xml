@@ -10,4 +10,5 @@
     <string name="select_category">Select category</string>
     <string name="main_menu">Main Menu</string>
     <string name="play_again">Play Again</string>
+    <string name="finalScore">FINAL SCORE</string>
 </resources>
