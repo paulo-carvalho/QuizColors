@@ -20,7 +20,10 @@ import java.util.Random;
  */
 public class QuestionFragment extends Fragment {
     private final int COUNT_ALTERNATIVES = 4;
-    private final int COUNT_QUESTIONS = 20;
+    protected static final int COUNT_QUESTIONS = 20;
+    protected static final String PARAM_SCORE = "score";
+
+    protected int score = 0;
 
     public QuestionFragment () {
 
@@ -65,10 +68,16 @@ public class QuestionFragment extends Fragment {
         answers[correctAnswer].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putInt(PARAM_SCORE, ++score);
+
+                ResultFragment resultFragment = new ResultFragment();
+                resultFragment.setArguments(bundle);
+
                 final FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                 //TODO: not working, back button closes app
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.replace(R.id.container, new ResultFragment()).commit();
+//                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.replace(R.id.container, resultFragment).commit();
             }
         });
 

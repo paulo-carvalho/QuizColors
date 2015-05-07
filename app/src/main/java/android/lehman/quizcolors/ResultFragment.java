@@ -7,14 +7,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 /**
  * Class from QuizColors at android.lehman.quizcolors
  * Created by Paulo-Lehman on 5/6/2015.
  */
 public class ResultFragment extends Fragment {
-
-    private final String PARAM_QUESTIONFRAGMENT = "category";
 
     public ResultFragment () {
 
@@ -24,6 +26,11 @@ public class ResultFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_result, container, false);
+        Bundle bundle = getArguments();
+        TextView finalScore = (TextView)rootView.findViewById(R.id.finalScore);
+        finalScore.setText(
+                String.valueOf(bundle.getInt(QuestionFragment.PARAM_SCORE)) + "/" + QuestionFragment.COUNT_QUESTIONS
+        );
 
         Button playAgain = (Button)rootView.findViewById(R.id.playAgain);
         playAgain.setOnClickListener(new View.OnClickListener() {
